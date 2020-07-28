@@ -38,16 +38,16 @@ class GameWonFragment : Fragment() {
 
         binding.nextMatchButton.setOnClickListener { view: View ->
             view.findNavController()
-                    .navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
+                    .navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment2())
         }
 
         val args = GameWonFragmentArgs.fromBundle(arguments!!)
         Toast.makeText(context, "NumCorrect: ${args.numCorrect}, NumQuestions: ${args.numQuestions}", Toast.LENGTH_LONG).show()
 
         binding.nextMatchButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(GameFragmentDirections
-                    .actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
+            view.findNavController().navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment2())
         }
+
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -66,7 +66,7 @@ class GameWonFragment : Fragment() {
 
 
     }
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.winner_menu, menu)
         // check if the activity resolves
@@ -75,7 +75,7 @@ class GameWonFragment : Fragment() {
             menu?.findItem(R.id.share)?.setVisible(false)
         }
     }
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item!!.itemId) {
             R.id.share -> shareSuccess()
         }
